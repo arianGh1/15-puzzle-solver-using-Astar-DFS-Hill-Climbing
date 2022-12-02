@@ -291,7 +291,7 @@ class Puzzle:
     			break
     		for i in cur.generate_child():
     			i.fval = self.f(i,goal)
-    			self.open.append(i)s
+    			self.open.append(i)
     		self.closed.append(cur)
     		del self.open[0]
     		self.open.sort(key = lambda x:x.fval,reverse=False)
