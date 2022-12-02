@@ -176,13 +176,12 @@ def dfs(node,iteration):
 		node = frontier.pop()
 		#########################################################################
 		matrix = node.val
-		path.append(matrix.reshape(1,mat_len**2))
+		path.append(matrix.reshape(1,mat_len**2)[0])
 		#########################################################################
 
 		frontier_vals.pop()
-	g.show_solution(path)
 	print("Finished!")
-	print("Number of iterations wasnt enough or its not solvable")
+	print("*************   Number of iterations wasnt enough or its not solvable   *************")
 	time.sleep(30)
 class Node_2:
     def __init__(self,data,level,fval):
@@ -222,15 +221,13 @@ class Node_2:
 
     def copy(self,root):
         """ Copy function to create a similar matrix of the given node"""
-        temp = []
-        print("root=",root)
-        for i in root:
-        	temp.append(i)
+        temp = root.copy()
+        
         return temp    
             
     def find(self,puz,x):
     	
-    	print("puz=",puz)
+    	
     	for i in range(0,len(self.data)):
 		    for j in range(0,len(self.data)):
 		        if puz[i][j] == x:
@@ -252,7 +249,7 @@ class Puzzle:
             temp = input().split(" ")
             puz.append(temp)
         puz = np.array(puz).reshape(mat_len,mat_len)
-        print("puz in accept func:",puz)
+        
         return puz
 
     def f(self,start,goal):
@@ -273,7 +270,7 @@ class Puzzle:
     	g = Graphics2_2(node.reshape(1,mat_len**2)[0])
     	start = node.reshape(mat_len,mat_len) 
     	print(start)       
-    	goal = np.array([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).reshape(mat_len,mat_len)
+    	goal = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]).reshape(mat_len,mat_len)
     	print(goal)
     	start = Node_2(start,0,0)
     	start.fval = self.f(start,goal)
@@ -281,9 +278,12 @@ class Puzzle:
     	print("\n\n")
     	path = []
     	for i in range(iteration):
+    		if i%250 == 0:
+    			print("Iteration : ", i,end="")
+    			print("   still processing...")
     		lst = []
     		cur = self.open[0]
-    		print("cur=",np.array(cur.data).reshape(1,mat_len**2))
+    		
 
     		path.append(np.array(cur.data).reshape(1,16)[0])
     		if(self.h(cur.data,goal) == 0):

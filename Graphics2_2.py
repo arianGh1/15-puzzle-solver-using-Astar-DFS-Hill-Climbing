@@ -75,10 +75,10 @@ class Graphics2_2:
         self.canvas.delete("all")
         rows = 0
         count = 0
-        print(path_to_solution)
+        
         for item in path_to_solution:
-            item = list(item)
-            print("item=",item)
+            item = item.tolist()
+            
             item[item.index(0)] = " "
             #print("in the iteration:",item.board.board_list)
             self.draw_board(item, (count * padding + padding) + (count * w), (rows * padding + padding) + (rows * h), w, h)
