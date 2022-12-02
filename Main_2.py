@@ -3,7 +3,6 @@ import sys
 import numpy as np
 from Gui_2 import Gui_2
 from Graphics2_2 import Graphics2_2
-from playsound import playsound
 import time
 
 class Node:
@@ -301,9 +300,6 @@ class Puzzle:
 
 
 
-
-
-playsound('in_the_end.mp3',False)
 gu = Gui_2()
 mat_len = 4
 node = Node(np.array(gu.get_board()).reshape(4,4))
