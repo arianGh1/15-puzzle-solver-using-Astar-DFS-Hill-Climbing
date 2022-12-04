@@ -21,7 +21,7 @@ class Graphics2_2:
         # initialize canvas
         self.window = tkinter.Tk()
         self.window.configure(background=self.background_color)
-        self.canvas = tkinter.Canvas(self.window, width=600, height=600000, bg=self.background_color,scrollregion=(0,0,600,6000000))
+        self.canvas = tkinter.Canvas(self.window, width=600, height=60000, bg=self.background_color,scrollregion=(0,0,600,60000))
         hbar=Scrollbar(self.window,orient=HORIZONTAL)
         hbar.pack(side=BOTTOM,fill=X)
         hbar.config(command=self.canvas.xview)

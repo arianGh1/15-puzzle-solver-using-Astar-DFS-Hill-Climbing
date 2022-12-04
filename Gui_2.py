@@ -12,10 +12,10 @@ class Gui_2:
         self.window.title("Specify Board Settings")
         self.window.configure(background=self.background_color)
         self.shuffles = 100
-        self.start_board = [tkinter.StringVar(), tkinter.StringVar(), tkinter.StringVar(), tkinter.StringVar(),
-                            tkinter.StringVar(), tkinter.StringVar(), tkinter.StringVar(), tkinter.StringVar(),
-                            tkinter.StringVar(), tkinter.StringVar(), tkinter.StringVar(), tkinter.StringVar(),
-                            tkinter.StringVar(), tkinter.StringVar(), tkinter.StringVar(), tkinter.StringVar()
+        self.start_board = [tkinter.StringVar(value="14"), tkinter.StringVar(value="1"), tkinter.StringVar(value="0"), tkinter.StringVar(value="15"),
+                            tkinter.StringVar(value="11"), tkinter.StringVar(value="8"), tkinter.StringVar(value="9"), tkinter.StringVar(value="3"),
+                            tkinter.StringVar(value="5"), tkinter.StringVar(value="10"), tkinter.StringVar(value="7"), tkinter.StringVar(value="12"),
+                            tkinter.StringVar(value="4"), tkinter.StringVar(value="2"), tkinter.StringVar(value="6"), tkinter.StringVar(value="13")
                             ]
         self.int_start_board = []
         self.iteration = tkinter.StringVar()
@@ -25,6 +25,7 @@ class Gui_2:
         tkinter.Label(self.window, text="8 BOARD", font=self.text_font, bg=self.rectangle_color, borderwidth=2, relief="groove").grid(row=0, columnspan=4, pady=5)  # this is placed in 1 0
         # the 9 text fields for the board
         tkinter.Entry(self.window, textvariable=self.start_board[0], justify=tkinter.CENTER, bg=self.rectangle_color).grid(row=1, column=0, pady=5)
+
         tkinter.Entry(self.window, textvariable=self.start_board[1], justify=tkinter.CENTER, bg=self.rectangle_color).grid(row=1, column=1, pady=5)
         tkinter.Entry(self.window, textvariable=self.start_board[2], justify=tkinter.CENTER, bg=self.rectangle_color).grid(row=1, column=2, pady=5)
         tkinter.Entry(self.window, textvariable=self.start_board[3], justify=tkinter.CENTER, bg=self.rectangle_color).grid(row=1, column=3, pady=5)
@@ -75,9 +76,9 @@ class Gui_2:
         ##############
         ##############
         #remember to empty the board and uncomment for loop
-        board = [14,1,0,15,11,8,9,3,5,10,7,12,4,2,6,13]
-        #for item in self.start_board:
-        #    board.append(int(item.get()))
+        board = []
+        for item in self.start_board:
+            board.append(int(item.get()))
         self.int_start_board = board.copy()
         self.window.destroy()
 

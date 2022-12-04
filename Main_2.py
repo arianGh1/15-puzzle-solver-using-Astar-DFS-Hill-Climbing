@@ -270,9 +270,9 @@ class Puzzle:
     def process(self,node,iteration):
     	g = Graphics2_2(node.reshape(1,mat_len**2)[0])
     	start = node.reshape(mat_len,mat_len) 
-    	print(start)       
+    	      
     	goal = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]).reshape(mat_len,mat_len)
-    	print(goal)
+    	
     	start = Node_2(start,0,0)
     	start.fval = self.f(start,goal)
     	self.open.append(start)
