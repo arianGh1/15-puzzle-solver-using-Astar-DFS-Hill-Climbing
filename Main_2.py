@@ -125,7 +125,7 @@ def dfs(node,iteration):
 					child = node.one
 				
 				
-					
+				childs+=1	
 				frontier.append(child)
 				frontier_vals.append(child.val)
 
@@ -182,6 +182,7 @@ def dfs(node,iteration):
 		frontier_vals.pop()
 	print("Finished!")
 	print("*************   Number of iterations wasnt enough or its not solvable   *************")
+	g.show_solution(path)
 	time.sleep(30)
 class Node_2:
     def __init__(self,data,level,fval):
@@ -298,8 +299,149 @@ class Puzzle:
     	print("Number of iterations wasnt enough or its not solvable")
     	g.show_solution(path)
 
+##################################################################################################################
+# HILL CLIMBING ALGORITHM
+#################################################
+
+def compare_to_goal(node):
+	matrix = node.val.reshape(1,mat_len**2)[0]
+	goal = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+	h = 0
+	for i in matrix:
+		if i == 0 : 
+			continue
+		else:
+			if matrix[i] != goal[i]:
+				h+=1
+	return h
+
+def hill_climb(node,iteration):
+	g = Graphics2_2(node.val.reshape(1,mat_len**2)[0])
+	explored = []
+	frontier = []
+	frontier_vals = []
+	frontier.append(node)
+	path = []
+	path.append(node.val.reshape(1,mat_len**2)[0])
+
+	print("\nGraphical interface will be shown after the end of iterations\n")
+	print("Started Hill-Climbing algorithm...\n\n")
+
+	for index in range(iteration):
+		
+		if index%250 == 0:
+			print("Iteration : ", index,end="")
+			print("   still processing...")
+		matrix = node.val
+		index = np.where(matrix==0)
+		i=index[0][0]
+		j=index[1][0]
+		
+		
+		h = compare_to_goal(node)
+		if h==0:
+			print("Goal found!")
+			g.show_solution(path)
+			return matrix
+
+		matrix = node.val
+		childs = 0
+		child_lst = []
+		if i > 0:
+			mat1 = np.copy(matrix)
+			mat1[i][j] = mat1[i - 1][j]
+			mat1[i - 1][j] = 0
+			if not is_in(mat1,explored):
+
+				node.one = Node(mat1)
+				child = node.one
+				childs += 1
+				child_lst.append(child)
+				
 
 
+		if j > 0:
+			
+			mat1 = np.copy(matrix)
+			mat1[i][j] = mat1[i][j - 1]
+			mat1[i][j - 1] = 0
+			
+			
+			if not is_in(mat1,explored):
+				
+				if childs==1:
+					node.two = Node(mat1)
+					child = node.two
+				else:
+					node.one = Node(mat1)
+					child = node.one
+				
+				childs+=1 
+				child_lst.append(child)
+				
+
+
+		if i < mat_len-1:
+			mat1 = np.copy(matrix)
+			mat1[i][j] = mat1[i + 1][j]
+			mat1[i + 1][j] = 0
+			if not is_in(mat1,explored):
+				if childs==2:
+					node.three = Node(mat1)
+					child = node.three
+				elif childs==1:
+					node.two = Node(mat1)
+					child = node.two
+				else:
+					node.one = Node(mat1)
+					child = node.one
+				childs += 1
+				child_lst.append(child)
+
+
+
+		if j < mat_len-1:
+			mat1 = np.copy(matrix)
+			mat1[i][j] = mat1[i][j + 1]
+			mat1[i][j + 1] = 0
+			if not is_in(mat1,explored):
+				if childs==3:
+					node.four = Node(mat1)
+					child = node.four
+				elif childs ==2:
+					node.three = Node(mat1)
+					child = node.three
+				elif childs ==1:
+					node.two = Node(mat1)
+					child = node.two
+				else:
+					node.one = Node(mat1)
+					child = node.one
+				childs += 1
+				child_lst.append(child)
+				
+				
+
+
+		explored.append(node.val)
+		minn = 100
+		for instance in child_lst:
+			h = order_check(instance)
+			if h<minn:
+				minn=h
+				node = instance
+		
+		#########################################################################
+		matrix = node.val
+		path.append(matrix.reshape(1,mat_len**2)[0])
+		#########################################################################
+
+		
+	print("Finished!")
+	print("*************   Number of iterations wasnt enough or its not solvable   *************")
+	g.show_solution(path)
+
+	time.sleep(30)
 gu = Gui_2()
 mat_len = 4
 node = Node(np.array(gu.get_board()).reshape(4,4))
@@ -312,3 +454,5 @@ if algorithm == "DFS":
 elif algorithm == "A*":
 	puz = Puzzle(4)
 	puz.process(np.array(gu.get_board()),iteration)
+else:
+	hill_climb(node,iteration)
