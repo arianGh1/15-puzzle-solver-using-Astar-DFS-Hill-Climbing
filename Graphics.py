@@ -1,7 +1,7 @@
 import tkinter
 from tkinter import *
 
-class Graphics2_2:
+class Graphics:
     def __init__(self, start_board_list):
         self.board_list = start_board_list.copy()
         # make 0 be a blank string

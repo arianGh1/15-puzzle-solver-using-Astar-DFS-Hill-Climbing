@@ -1,8 +1,8 @@
 import time
 import sys
 import numpy as np
-from Gui_2 import Gui_2
-from Graphics2_2 import Graphics2_2
+from Gui import Gui
+from Graphics import Graphics
 import time
 
 class Node:
@@ -63,7 +63,7 @@ def is_in(arr,second):
 
 
 def dfs(node,iteration):
-	g = Graphics2_2(node.val.reshape(1,mat_len**2)[0])
+	g = Graphics(node.val.reshape(1,mat_len**2)[0])
 	explored = []
 	frontier = []
 	frontier_vals = []
@@ -268,7 +268,7 @@ class Puzzle:
         
 
     def process(self,node,iteration):
-    	g = Graphics2_2(node.reshape(1,mat_len**2)[0])
+    	g = Graphics(node.reshape(1,mat_len**2)[0])
     	start = node.reshape(mat_len,mat_len) 
     	      
     	goal = np.array([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).reshape(mat_len,mat_len)
@@ -316,7 +316,7 @@ def compare_to_goal(node):
 	return h
 
 def hill_climb(node,iteration):
-	g = Graphics2_2(node.val.reshape(1,mat_len**2)[0])
+	g = Graphics(node.val.reshape(1,mat_len**2)[0])
 	explored = []
 	frontier = []
 	frontier_vals = []
@@ -442,7 +442,7 @@ def hill_climb(node,iteration):
 	g.show_solution(path)
 
 	time.sleep(30)
-gu = Gui_2()
+gu = Gui()
 mat_len = 4
 node = Node(np.array(gu.get_board()).reshape(4,4))
 

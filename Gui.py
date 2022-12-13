@@ -1,6 +1,6 @@
 import tkinter
 from tkinter.ttk import *
-class Gui_2:
+class Gui:
     def __init__(self):
         self.board = [0, 1, 2, 3, 4, 5, 6, 7, 8,9,10,11,12,13,14,15]
         self.text_font = "Laksaman 18"
@@ -22,7 +22,7 @@ class Gui_2:
         self.algorithm = tkinter.StringVar()        
 
         # beginning label
-        tkinter.Label(self.window, text="8 BOARD", font=self.text_font, bg=self.rectangle_color, borderwidth=2, relief="groove").grid(row=0, columnspan=4, pady=5)  # this is placed in 1 0
+        tkinter.Label(self.window, text="15 BOARD", font=self.text_font, bg=self.rectangle_color, borderwidth=2, relief="groove").grid(row=0, columnspan=4, pady=5)  # this is placed in 1 0
         # the 9 text fields for the board
         tkinter.Entry(self.window, textvariable=self.start_board[0], justify=tkinter.CENTER, bg=self.rectangle_color).grid(row=1, column=0, pady=5)
 
