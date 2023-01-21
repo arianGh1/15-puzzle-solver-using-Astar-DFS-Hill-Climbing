@@ -3,7 +3,7 @@ import sys
 import numpy as np
 from Gui import Gui
 from Graphics import Graphics
-import time
+
 
 class Node:
     def __init__(self, key):
